@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 
+import 'config/api_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'pages/dashboard/dashboard_widget.dart';
+import 'services/api_client.dart';
+import 'services/dashboard_repository.dart';
 
 void main() {
   runApp(const SingnplayWorshipTimeApp());
+}
+
+/// Live API once `API_BASE_URL` is provided via `--dart-define`, sample
+/// data otherwise. See `config/api_config.dart` for how to set it.
+DashboardRepository _buildDashboardRepository() {
+  if (!ApiConfig.isConfigured) return MockDashboardRepository();
+  return ApiDashboardRepository(
+    ApiClient(baseUrl: ApiConfig.baseUrl, authToken: ApiConfig.authToken),
+  );
 }
 
 class SingnplayWorshipTimeApp extends StatelessWidget {
@@ -26,7 +38,7 @@ class SingnplayWorshipTimeApp extends StatelessWidget {
           tertiary: theme.tertiary,
         ),
       ),
-      home: const DashboardWidget(),
+      home: DashboardWidget(repository: _buildDashboardRepository()),
     );
   }
 }

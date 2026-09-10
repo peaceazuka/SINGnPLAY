@@ -1,14 +1,33 @@
 import 'package:flutter/material.dart';
 
+import '../../services/icon_mapping.dart';
+
+/// Parses a `"#RRGGBB"` / `"RRGGBB"` string from the API into a [Color].
+Color colorFromHex(String hex, {Color fallback = const Color(0xFF5B3DF5)}) {
+  final cleaned = hex.replaceFirst('#', '');
+  if (cleaned.length != 6) return fallback;
+  final value = int.tryParse('ff$cleaned', radix: 16);
+  return value == null ? fallback : Color(value);
+}
+
 /// A member of the family who can be selected on the dashboard, similar to
 /// profile switching in Simply Piano / Netflix-style family apps.
 class FamilyProfile {
   const FamilyProfile({
+    required this.id,
     required this.name,
     required this.emoji,
     required this.color,
   });
 
+  factory FamilyProfile.fromJson(Map<String, dynamic> json) => FamilyProfile(
+        id: json['id'] as String,
+        name: json['name'] as String,
+        emoji: json['emoji'] as String? ?? '🙂',
+        color: colorFromHex(json['colorHex'] as String? ?? ''),
+      );
+
+  final String id;
   final String name;
   final String emoji;
   final Color color;
@@ -21,6 +40,12 @@ class SongCategory {
     required this.icon,
     required this.color,
   });
+
+  factory SongCategory.fromJson(Map<String, dynamic> json) => SongCategory(
+        title: json['title'] as String,
+        icon: resolveIcon(json['icon'] as String?),
+        color: colorFromHex(json['colorHex'] as String? ?? ''),
+      );
 
   final String title;
   final IconData icon;
@@ -37,6 +62,14 @@ class SongItem {
     required this.duration,
   });
 
+  factory SongItem.fromJson(Map<String, dynamic> json) => SongItem(
+        title: json['title'] as String,
+        subtitle: json['subtitle'] as String? ?? '',
+        icon: resolveIcon(json['icon'] as String?),
+        difficulty: json['difficulty'] as int? ?? 1,
+        duration: json['duration'] as String? ?? '',
+      );
+
   final String title;
   final String subtitle;
   final IconData icon;
@@ -45,18 +78,74 @@ class SongItem {
   final String duration;
 }
 
-/// Holds the mock data and small pieces of derived state the Dashboard
-/// screen needs. In a full FlutterFlow export this would be the generated
-/// `DashboardModel`, wired up to backend queries instead of static data.
-class DashboardModel {
-  final List<FamilyProfile> familyProfiles = const [
-    FamilyProfile(name: 'Mom', emoji: '👩', color: Color(0xFFFF6B9D)),
-    FamilyProfile(name: 'Dad', emoji: '👨', color: Color(0xFF4ECDC4)),
-    FamilyProfile(name: 'Noah', emoji: '🧒', color: Color(0xFFFFC857)),
-    FamilyProfile(name: 'Ava', emoji: '👧', color: Color(0xFF5B3DF5)),
+/// Streak/progress numbers plus the "continue practicing" and daily
+/// challenge copy shown near the top of the dashboard.
+class DashboardSummary {
+  const DashboardSummary({
+    required this.dayStreak,
+    required this.songsLearned,
+    required this.minutesToday,
+    required this.continueSongTitle,
+    required this.continueProgress,
+    required this.challengeTitle,
+    required this.challengeDescription,
+  });
+
+  factory DashboardSummary.fromJson(Map<String, dynamic> json) {
+    final streak = json['streak'] as Map<String, dynamic>? ?? const {};
+    final continuePracticing =
+        json['continuePracticing'] as Map<String, dynamic>? ?? const {};
+    final challenge = json['challenge'] as Map<String, dynamic>? ?? const {};
+    return DashboardSummary(
+      dayStreak: streak['dayStreak'] as int? ?? 0,
+      songsLearned: streak['songsLearned'] as int? ?? 0,
+      minutesToday: streak['minutesToday'] as int? ?? 0,
+      continueSongTitle: continuePracticing['songTitle'] as String? ?? '',
+      continueProgress:
+          (continuePracticing['progress'] as num?)?.toDouble() ?? 0,
+      challengeTitle: challenge['title'] as String? ?? '',
+      challengeDescription: challenge['description'] as String? ?? '',
+    );
+  }
+
+  final int dayStreak;
+  final int songsLearned;
+  final int minutesToday;
+  final String continueSongTitle;
+  final double continueProgress;
+  final String challengeTitle;
+  final String challengeDescription;
+}
+
+/// Everything the dashboard screen needs for one family profile, as
+/// returned by [DashboardRepository.loadDashboard].
+class DashboardData {
+  const DashboardData({
+    required this.profiles,
+    required this.categories,
+    required this.recommended,
+    required this.summary,
+  });
+
+  final List<FamilyProfile> profiles;
+  final List<SongCategory> categories;
+  final List<SongItem> recommended;
+  final DashboardSummary summary;
+}
+
+/// Sample data used by `MockDashboardRepository` until a real API base URL
+/// is configured (see `config/api_config.dart`).
+class DashboardMockData {
+  const DashboardMockData._();
+
+  static const List<FamilyProfile> profiles = [
+    FamilyProfile(id: 'mom', name: 'Mom', emoji: '👩', color: Color(0xFFFF6B9D)),
+    FamilyProfile(id: 'dad', name: 'Dad', emoji: '👨', color: Color(0xFF4ECDC4)),
+    FamilyProfile(id: 'noah', name: 'Noah', emoji: '🧒', color: Color(0xFFFFC857)),
+    FamilyProfile(id: 'ava', name: 'Ava', emoji: '👧', color: Color(0xFF5B3DF5)),
   ];
 
-  final List<SongCategory> categories = const [
+  static const List<SongCategory> categories = [
     SongCategory(
         title: 'Worship Songs',
         icon: Icons.church_rounded,
@@ -83,7 +172,7 @@ class DashboardModel {
         color: Color(0xFFFFC857)),
   ];
 
-  final List<SongItem> recommended = const [
+  static const List<SongItem> recommended = [
     SongItem(
       title: 'This Little Light of Mine',
       subtitle: 'Kids & Rhymes',
@@ -114,17 +203,14 @@ class DashboardModel {
     ),
   ];
 
-  // Current progress snapshot for the "Continue Practicing" hero card.
-  final String continueSongTitle = 'Amazing Grace';
-  final double continueProgress = 0.62;
-
-  // Streak / stats shown near the top of the dashboard.
-  final int dayStreak = 12;
-  final int songsLearned = 28;
-  final int minutesToday = 15;
-
-  // Daily challenge banner copy.
-  final String challengeTitle = "Today's Challenge";
-  final String challengeDescription =
-      "Learn 'Jesus Loves Me' in 10 minutes and earn a gold star!";
+  static const DashboardSummary summary = DashboardSummary(
+    dayStreak: 12,
+    songsLearned: 28,
+    minutesToday: 15,
+    continueSongTitle: 'Amazing Grace',
+    continueProgress: 0.62,
+    challengeTitle: "Today's Challenge",
+    challengeDescription:
+        "Learn 'Jesus Loves Me' in 10 minutes and earn a gold star!",
+  );
 }

@@ -19,8 +19,8 @@ export const storeBadges = {
 };
 
 export const hero = {
-  eyebrow: "For meaningful Parent-Child Connection",
-  heading: "Worship songs the whole family learns together",
+  eyebrow: "SINGnPLAY WorshipTime",
+  heading: "For families to share joyful moments and connect better",
   subheading:
     "Every Mom, Dad, and kid gets their own profile, their own songs, and their own streak. A fun worship experience, built for connection and meaningful engagement at home.",
   ctaLabel: "Start free",

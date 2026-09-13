@@ -44,19 +44,33 @@ npm run preview   # serve the production build locally to double check
 
 Output goes to `dist/`.
 
-## Deploying to Cloudflare Pages
+## Deploying to Cloudflare Pages (automatic, via GitHub Actions)
 
-1. Push this repo to GitHub (already done if you're reading this from the repo).
-2. In the [Cloudflare dashboard](https://dash.cloudflare.com) → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**, pick this repository.
-3. Set the build configuration:
-   - **Root directory**: `website`
-   - **Build command**: `npm run build`
-   - **Build output directory**: `dist`
-4. Deploy. Every push to your main branch redeploys automatically; every
-   pull request gets its own preview URL.
-5. Add a custom domain under the Pages project's **Custom domains** tab —
-   type `singnplay.app`. Since the domain is registered in the same
-   Cloudflare account, DNS is wired up and the SSL certificate is issued
-   automatically, no manual records needed.
+Deploys run in `.github/workflows/deploy-website.yml` — every push that
+touches `website/**` builds the site and pushes it to Cloudflare Pages
+with `wrangler`. One-time setup:
 
-No environment variables or server are needed; this is a fully static site.
+1. In Cloudflare, create a scoped API token: **dashboard → My Profile →
+   API Tokens → Create Token**, custom permissions only:
+   - `Account → Cloudflare Pages → Edit`
+   - `Zone → DNS → Edit`, scoped to just the `singnplay.app` zone
+   Give it a short expiration date.
+2. Find your **Account ID** (Cloudflare dashboard → Workers & Pages →
+   right sidebar on the overview page).
+3. In the GitHub repo: **Settings → Secrets and variables → Actions →
+   New repository secret**, add:
+   - `CLOUDFLARE_API_TOKEN`
+   - `CLOUDFLARE_ACCOUNT_ID`
+4. Push to the branch (or run the workflow manually from the **Actions**
+   tab) — this creates the `singnplay` Pages project on first run and
+   deploys `website/dist`.
+5. In Cloudflare, open the new `singnplay` Pages project → **Custom
+   domains** → **Add domain** → `singnplay.app`. Since the domain is
+   already in the same Cloudflare account, DNS and SSL are configured
+   automatically — this one step still has to be done once by hand in
+   the dashboard.
+
+No environment variables or server are needed at runtime; this is a
+fully static site. The workflow currently triggers on pushes to
+`claude/upbeat-pascal-0sdcxw` — update the `branches:` list once this
+work lands on your repo's permanent branch.

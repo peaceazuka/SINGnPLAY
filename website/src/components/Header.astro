@@ -1,21 +1,71 @@
 ---
 import { brand, storeBadges, hero } from "../data/site";
+
+const navLinks = [
+  { href: "#how-it-works", label: "How it works" },
+  { href: "#songs", label: "Songs" },
+  { href: "#pricing", label: "Pricing" },
+  { href: "#faq", label: "FAQ" },
+];
 ---
 
 <header class="sticky top-0 z-50 bg-primary-bg/90 backdrop-blur border-b border-black/5">
+  <input type="checkbox" id="mobile-menu-toggle" class="peer hidden" />
+
   <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
     <a href="/" class="font-display text-xl font-bold text-primary">{brand.name}</a>
+
     <nav class="hidden gap-8 text-sm font-semibold text-primary-text md:flex">
-      <a href="#how-it-works" class="hover:text-primary">How it works</a>
-      <a href="#songs" class="hover:text-primary">Songs</a>
-      <a href="#pricing" class="hover:text-primary">Pricing</a>
-      <a href="#faq" class="hover:text-primary">FAQ</a>
+      {navLinks.map((link) => (
+        <a href={link.href} class="hover:text-primary">{link.label}</a>
+      ))}
     </nav>
+
+    <div class="flex items-center gap-3">
+      <a
+        href={storeBadges.appStoreUrl}
+        class="hidden rounded-full bg-primary px-5 py-2 text-sm font-bold text-white shadow-sm transition hover:opacity-90 md:inline-block"
+      >
+        {hero.ctaLabel}
+      </a>
+
+      <label
+        for="mobile-menu-toggle"
+        aria-label="Toggle menu"
+        class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-primary-text transition hover:bg-alternate md:hidden"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="h-6 w-6">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </label>
+    </div>
+  </div>
+
+  <nav
+    id="mobile-menu"
+    class="hidden peer-checked:flex flex-col gap-1 border-t border-black/5 px-6 pb-4 pt-2 text-sm font-semibold text-primary-text md:hidden"
+  >
+    {navLinks.map((link) => (
+      <a href={link.href} class="rounded-lg px-2 py-3 hover:bg-alternate">{link.label}</a>
+    ))}
     <a
       href={storeBadges.appStoreUrl}
-      class="rounded-full bg-primary px-5 py-2 text-sm font-bold text-white shadow-sm transition hover:opacity-90"
+      class="mt-2 rounded-full bg-primary px-5 py-3 text-center font-bold text-white shadow-sm transition hover:opacity-90"
     >
       {hero.ctaLabel}
     </a>
-  </div>
+  </nav>
 </header>
+
+<script>
+  const toggle = document.getElementById("mobile-menu-toggle") as HTMLInputElement | null;
+  const menu = document.getElementById("mobile-menu");
+
+  menu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      if (toggle) toggle.checked = false;
+    });
+  });
+</script>

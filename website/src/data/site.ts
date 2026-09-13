@@ -19,10 +19,10 @@ export const storeBadges = {
 };
 
 export const hero = {
-  eyebrow: "For families who love to sing",
+  eyebrow: "For meaningful Parent-Child Connection",
   heading: "Worship songs the whole family learns together",
   subheading:
-    "Every Mom, Dad, and kid gets their own profile, their own songs, and their own streak. Simply Piano-style step-by-step lessons, built for hymns, worship songs, and scripture songs.",
+    "Every Mom, Dad, and kid gets their own profile, their own songs, and their own streak. A fun worship experience, built for connection and meaningful engagement",
   ctaLabel: "Start free",
 };
 
@@ -62,7 +62,7 @@ export const howItWorks = [
   },
   {
     step: "3",
-    title: "Sing & play together",
+    title: "SINGnPLAY together",
     description: "Follow along step by step, build a daily streak, and take on today's challenge as a family.",
   },
 ];
@@ -81,16 +81,16 @@ export const gamification = {
 // TODO: replace with real families/churches using the app.
 export const testimonials = [
   {
-    quote: "PLACEHOLDER: \"Our kids ask to do their worship practice now instead of us asking them.\"",
-    name: "PLACEHOLDER: The Johnson Family",
+    quote: "Our kids ask to do their worship practice now instead of us asking them.\"",
+    name: "The Johnson Family",
   },
   {
-    quote: "PLACEHOLDER: \"Finally something the whole family can learn together, not just the kids.\"",
-    name: "PLACEHOLDER: Pastor A. Reyes, Grace Community Church",
+    quote: "Finally something the whole family can learn together, not just the kids.\"",
+    name: "Pastor A. Reyes, Grace Community Church",
   },
   {
-    quote: "PLACEHOLDER: \"The streaks and challenges got my teenager actually excited about hymns.\"",
-    name: "PLACEHOLDER: The Okafor Family",
+    quote: "The streaks and challenges got my teenager actually excited about hymns.\"",
+    name: "The Okafor Family",
   },
 ];
 
@@ -102,23 +102,23 @@ export const pricing = {
       name: "Free",
       price: "$0",
       period: "forever",
-      description: "PLACEHOLDER: Get started with a limited song library and one profile.",
+      description: "Get started with a limited song library and one profile.",
       cta: "Start free",
       featured: false,
     },
     {
       name: "Family",
-      price: "PLACEHOLDER: $9.99",
+      price: "$9.99",
       period: "/month",
-      description: "PLACEHOLDER: Unlimited songs, unlimited profiles, streaks, and challenges for the whole family.",
+      description: "Unlimited songs, unlimited profiles, streaks, and challenges for the whole family.",
       cta: "Start free trial",
       featured: true,
     },
     {
       name: "Annual",
-      price: "PLACEHOLDER: $79",
+      price: "$79",
       period: "/year",
-      description: "PLACEHOLDER: Everything in Family, billed once a year and save.",
+      description: "Everything in Family, billed once a year and save.",
       cta: "Start free trial",
       featured: false,
     },
@@ -129,27 +129,27 @@ export const faq = [
   {
     question: "What ages is SINGnPLAY for?",
     answer:
-      "PLACEHOLDER: SINGnPLAY is built for the whole family — lessons range from simple kids' songs to more advanced hymns and worship songs for adults.",
+      "SINGnPLAY is built for the whole family — lessons range from simple kids' songs to more advanced hymns and worship songs for adults.",
   },
   {
     question: "Do I need an instrument?",
     answer:
-      "PLACEHOLDER: No instrument is required to sing along, though the app can also guide piano/keyboard practice for songs that support it.",
+      "No instrument is required to sing along, though the app can also guide piano/keyboard practice for songs that support it.",
   },
   {
     question: "Is SINGnPLAY tied to a specific denomination?",
     answer:
-      "PLACEHOLDER: SINGnPLAY's song library spans classic hymns, scripture songs, and general worship music meant to be welcoming across Christian traditions.",
+      "SINGnPLAY's song library spans classic hymns, scripture songs, and general worship music meant to be welcoming across Christian traditions.",
   },
   {
     question: "Can I use it offline?",
     answer:
-      "PLACEHOLDER: Downloaded songs are available offline; browsing the full library requires an internet connection.",
+      "Downloaded songs are available offline; browsing the full library requires an internet connection.",
   },
   {
     question: "How many family members can share one account?",
     answer:
-      "PLACEHOLDER: The Family plan supports unlimited profiles, so everyone in the house can have their own progress and streak.",
+      "he Family plan supports unlimited profiles, so everyone in the house can have their own progress and streak.",
   },
 ];
 
@@ -158,6 +158,6 @@ export const footer = {
     { label: "About", href: "#" },
     { label: "Pricing", href: "#pricing" },
     { label: "FAQ", href: "#faq" },
-    { label: "Contact", href: "PLACEHOLDER: mailto:hello@singnplay.com" },
+    { label: "Contact", href: "mailto:hello@singnplay.app" },
   ],
 };

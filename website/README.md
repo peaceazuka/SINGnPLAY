@@ -55,6 +55,8 @@ Output goes to `dist/`.
 4. Deploy. Every push to your main branch redeploys automatically; every
    pull request gets its own preview URL.
 5. Add a custom domain under the Pages project's **Custom domains** tab —
-   Cloudflare issues the SSL certificate automatically.
+   type `singnplay.app`. Since the domain is registered in the same
+   Cloudflare account, DNS is wired up and the SSL certificate is issued
+   automatically, no manual records needed.
 
 No environment variables or server are needed; this is a fully static site.

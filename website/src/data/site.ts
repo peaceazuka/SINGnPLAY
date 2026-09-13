@@ -129,7 +129,7 @@ export const faq = [
   {
     question: "What ages is SINGnPLAY for?",
     answer:
-      "SINGnPLAY is built for the whole family — lessons range from simple kids' songs to more advanced hymns and worship songs for adults.",
+      "SINGnPLAY is built for the whole family. Lessons range from simple kids' songs to more advanced hymns and worship songs for adults.",
   },
   {
     question: "Do I need an instrument?",
@@ -139,7 +139,7 @@ export const faq = [
   {
     question: "Is SINGnPLAY tied to a specific denomination?",
     answer:
-      "SINGnPLAY's song library spans classic hymns, scripture songs, and general worship music meant to be welcoming across Christian traditions.",
+      "SINGnPLAY's song library spans classic hymns, bible songs, and general worship music accepted across different christian traditions .",
   },
   {
     question: "Can I use it offline?",

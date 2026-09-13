@@ -1,0 +1,24 @@
+---
+import { brand, storeBadges } from "../data/site";
+---
+
+<section class="bg-primary py-16 text-center text-white">
+  <div class="mx-auto max-w-2xl px-6">
+    <h2 class="font-display text-3xl font-bold">Start singing together today</h2>
+    <p class="mt-3 text-white/90">Download {brand.name} free and pick your family's first song.</p>
+    <div class="mt-8 flex flex-wrap justify-center gap-4">
+      <a
+        href={storeBadges.appStoreUrl}
+        class="rounded-full bg-white px-7 py-3 text-base font-bold text-primary shadow-md transition hover:opacity-90"
+      >
+        Download on the App Store
+      </a>
+      <a
+        href={storeBadges.playStoreUrl}
+        class="rounded-full border-2 border-white/60 px-7 py-3 text-base font-bold text-white transition hover:bg-white/10"
+      >
+        Get it on Google Play
+      </a>
+    </div>
+  </div>
+</section>

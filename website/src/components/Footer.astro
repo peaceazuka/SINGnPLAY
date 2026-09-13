@@ -1,0 +1,15 @@
+---
+import { brand, footer } from "../data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-black/5 bg-primary-bg py-10">
+  <div class="mx-auto flex max-w-6xl flex-col items-center gap-4 px-6 text-sm text-secondary-text md:flex-row md:justify-between">
+    <p class="font-display font-bold text-primary-text">{brand.name}</p>
+    <nav class="flex flex-wrap justify-center gap-6">
+      {footer.links.map((link) => <a href={link.href} class="hover:text-primary">{link.label}</a>)}
+    </nav>
+    <p>&copy; {year} {brand.name}. All rights reserved.</p>
+  </div>
+</footer>

@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+/*
+ * Brand tokens, copied from the app's own design system so the marketing
+ * site and the product look like the same thing:
+ * lib/flutter_flow/flutter_flow_theme.dart (WorshipTimeTheme)
+ */
+@theme {
+  --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Nunito", ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary: #5b3df5; /* indigo */
+  --color-secondary: #ff6b9d; /* coral */
+  --color-tertiary: #ffc857; /* gold */
+  --color-alternate: #ede7ff;
+
+  --color-primary-text: #241c3d;
+  --color-secondary-text: #7a7392;
+
+  --color-primary-bg: #fff8f0; /* warm cream */
+  --color-secondary-bg: #ffffff;
+
+  --color-accent-1: #4ecdc4; /* teal */
+  --color-accent-2: #ffe0b2;
+  --color-accent-3: #ffd1dc;
+
+  --color-success: #3bb273;
+  --color-warning: #ffa726;
+  --color-error: #e5525a;
+}
+
+body {
+  background-color: var(--color-primary-bg);
+  color: var(--color-primary-text);
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+}

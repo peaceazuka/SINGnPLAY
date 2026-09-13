@@ -1,0 +1,84 @@
+---
+import { hero, storeBadges, familyProfiles } from "../data/site";
+---
+
+<section class="mx-auto max-w-6xl px-6 pt-16 pb-20 md:pt-24 md:pb-28">
+  <div class="grid items-center gap-12 md:grid-cols-2">
+    <div>
+      <p class="font-display text-sm font-semibold uppercase tracking-wide text-secondary">
+        {hero.eyebrow}
+      </p>
+      <h1 class="mt-3 font-display text-4xl font-bold leading-tight text-primary-text md:text-5xl">
+        {hero.heading}
+      </h1>
+      <p class="mt-5 max-w-lg text-lg text-secondary-text">
+        {hero.subheading}
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-4">
+        <a
+          href={storeBadges.appStoreUrl}
+          class="rounded-full bg-primary px-7 py-3 text-base font-bold text-white shadow-md transition hover:opacity-90"
+        >
+          {hero.ctaLabel}
+        </a>
+        <a
+          href={storeBadges.playStoreUrl}
+          class="rounded-full border-2 border-primary/20 px-7 py-3 text-base font-bold text-primary transition hover:bg-alternate"
+        >
+          Get it on Google Play
+        </a>
+      </div>
+
+      <div class="mt-8 flex -space-x-2">
+        {
+          familyProfiles.map((p) => (
+            <span
+              class="flex h-11 w-11 items-center justify-center rounded-full border-2 border-primary-bg text-xl"
+              style={`background-color:${p.colorHex}33`}
+              title={p.name}
+            >
+              {p.emoji}
+            </span>
+          ))
+        }
+        <span class="ml-4 self-center text-sm font-semibold text-secondary-text">
+          One app. Every profile in the family.
+        </span>
+      </div>
+    </div>
+
+    <div class="relative mx-auto w-full max-w-sm">
+      <div class="absolute -inset-6 -z-10 rounded-[3rem] bg-alternate blur-2xl"></div>
+      <div class="rounded-[2.5rem] border-8 border-primary-text/90 bg-secondary-bg p-4 shadow-2xl">
+        <div class="rounded-3xl bg-primary-bg p-5">
+          <p class="font-display text-lg font-bold text-primary-text">Hi, Ava! 👧</p>
+          <p class="text-sm text-secondary-text">Ready to sing today?</p>
+
+          <div class="mt-4 grid grid-cols-3 gap-2 text-center">
+            <div class="rounded-xl bg-secondary-bg p-2 shadow-sm">
+              <p class="font-display text-xl font-bold text-primary">12</p>
+              <p class="text-[10px] font-semibold text-secondary-text">DAY STREAK</p>
+            </div>
+            <div class="rounded-xl bg-secondary-bg p-2 shadow-sm">
+              <p class="font-display text-xl font-bold text-secondary">28</p>
+              <p class="text-[10px] font-semibold text-secondary-text">SONGS</p>
+            </div>
+            <div class="rounded-xl bg-secondary-bg p-2 shadow-sm">
+              <p class="font-display text-xl font-bold text-tertiary">15</p>
+              <p class="text-[10px] font-semibold text-secondary-text">MIN TODAY</p>
+            </div>
+          </div>
+
+          <div class="mt-4 rounded-2xl bg-secondary-bg p-4 shadow-sm">
+            <p class="text-xs font-bold uppercase tracking-wide text-secondary">Continue practicing</p>
+            <p class="mt-1 font-display font-semibold text-primary-text">Amazing Grace</p>
+            <div class="mt-2 h-2 w-full rounded-full bg-alternate">
+              <div class="h-2 w-[62%] rounded-full bg-primary"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

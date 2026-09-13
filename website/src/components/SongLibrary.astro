@@ -1,0 +1,50 @@
+---
+import { categories, featuredSongs } from "../data/site";
+---
+
+<section id="songs" class="bg-secondary-bg py-20">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="font-display text-3xl font-bold text-primary-text md:text-4xl">
+        A song library built for every family moment
+      </h2>
+      <p class="mt-3 text-secondary-text">
+        From nursery rhymes to classic hymns, browse by category and pick up right where you left off.
+      </p>
+    </div>
+
+    <div class="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3">
+      {
+        categories.map((c) => (
+          <div
+            class="flex flex-col items-center gap-2 rounded-2xl p-6 text-center shadow-sm"
+            style={`background-color:${c.colorHex}1A`}
+          >
+            <span class="text-3xl">{c.emoji}</span>
+            <span class="font-display font-semibold text-primary-text">{c.title}</span>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-14">
+      <h3 class="font-display text-xl font-bold text-primary-text">Popular right now</h3>
+      <div class="mt-5 divide-y divide-black/5 rounded-2xl border border-black/5">
+        {
+          featuredSongs.map((song) => (
+            <div class="flex items-center justify-between gap-4 px-5 py-4">
+              <div>
+                <p class="font-display font-semibold text-primary-text">{song.title}</p>
+                <p class="text-sm text-secondary-text">{song.subtitle}</p>
+              </div>
+              <div class="flex items-center gap-4 text-sm text-secondary-text">
+                <span>{"★".repeat(song.difficulty)}{"☆".repeat(3 - song.difficulty)}</span>
+                <span>{song.duration}</span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

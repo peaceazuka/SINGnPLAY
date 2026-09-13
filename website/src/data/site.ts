@@ -22,7 +22,7 @@ export const hero = {
   eyebrow: "For meaningful Parent-Child Connection",
   heading: "Worship songs the whole family learns together",
   subheading:
-    "Every Mom, Dad, and kid gets their own profile, their own songs, and their own streak. A fun worship experience, built for connection and meaningful engagement",
+    "Every Mom, Dad, and kid gets their own profile, their own songs, and their own streak. A fun worship experience, built for connection and meaningful engagement at home.",
   ctaLabel: "Start free",
 };
 
@@ -53,7 +53,7 @@ export const howItWorks = [
   {
     step: "1",
     title: "Pick a profile",
-    description: "Every family member gets their own space — Mom, Dad, and every kid, each with their own progress.",
+    description: "Every family member gets their own space. Mom, Dad, and every kid, each with their own progress.",
   },
   {
     step: "2",
@@ -149,7 +149,7 @@ export const faq = [
   {
     question: "How many family members can share one account?",
     answer:
-      "he Family plan supports unlimited profiles, so everyone in the house can have their own progress and streak.",
+      "The Family plan supports unlimited profiles, so everyone in the house can have their own progress and streak.",
   },
 ];
 

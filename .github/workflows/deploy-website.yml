@@ -12,6 +12,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,10 +34,12 @@ jobs:
         working-directory: website
         run: npm run build
 
+      - name: Ensure Cloudflare Pages project exists
+        working-directory: website
+        # Fails harmlessly if the project already exists; only matters on
+        # the very first run.
+        run: npx wrangler pages project create singnplay --production-branch=${{ github.ref_name }} || true
+
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: website
-          command: pages deploy dist --project-name=singnplay
+        working-directory: website
+        run: npx wrangler pages deploy dist --project-name=singnplay --commit-dirty=true

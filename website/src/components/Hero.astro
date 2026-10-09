@@ -1,5 +1,5 @@
 ---
-import { hero, storeBadges, familyProfiles } from "../data/site";
+import { hero, webAppUrl, storeBadges, familyProfiles } from "../data/site";
 ---
 
 <section class="mx-auto max-w-6xl px-6 pt-16 pb-20 md:pt-24 md:pb-28">
@@ -17,7 +17,7 @@ import { hero, storeBadges, familyProfiles } from "../data/site";
 
       <div class="mt-8 flex flex-wrap items-center gap-4">
         <a
-          href={storeBadges.appStoreUrl}
+          href={webAppUrl}
           class="rounded-full bg-primary px-7 py-3 text-base font-bold text-white shadow-md transition hover:opacity-90"
         >
           {hero.ctaLabel}

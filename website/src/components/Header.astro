@@ -1,5 +1,5 @@
 ---
-import { brand, storeBadges, hero } from "../data/site";
+import { brand, webAppUrl, hero } from "../data/site";
 
 const navLinks = [
   { href: "#how-it-works", label: "How it works" },
@@ -23,7 +23,7 @@ const navLinks = [
 
     <div class="flex items-center gap-3">
       <a
-        href={storeBadges.appStoreUrl}
+        href={webAppUrl}
         class="hidden rounded-full bg-primary px-5 py-2 text-sm font-bold text-white shadow-sm transition hover:opacity-90 md:inline-block"
       >
         {hero.ctaLabel}
@@ -51,7 +51,7 @@ const navLinks = [
       <a href={link.href} class="rounded-lg px-2 py-3 hover:bg-alternate">{link.label}</a>
     ))}
     <a
-      href={storeBadges.appStoreUrl}
+      href={webAppUrl}
       class="mt-2 rounded-full bg-primary px-5 py-3 text-center font-bold text-white shadow-sm transition hover:opacity-90"
     >
       {hero.ctaLabel}

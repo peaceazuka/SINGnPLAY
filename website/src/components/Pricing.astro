@@ -1,5 +1,5 @@
 ---
-import { pricing } from "../data/site";
+import { pricing, webAppUrl } from "../data/site";
 ---
 
 <section id="pricing" class="bg-secondary-bg py-20">
@@ -28,7 +28,7 @@ import { pricing } from "../data/site";
               {plan.description}
             </p>
             <a
-              href="#"
+              href={webAppUrl}
               class:list={[
                 "mt-6 rounded-full px-6 py-3 text-center text-sm font-bold transition",
                 plan.featured ? "bg-white text-primary hover:opacity-90" : "bg-primary text-white hover:opacity-90",

@@ -18,6 +18,11 @@ export const storeBadges = {
   playStoreUrl: "PLACEHOLDER: https://play.google.com/store/apps/details?id=com.singnplay.worshiptime",
 };
 
+// The native apps aren't published yet, but the web build is live — every
+// "Start free" / "Start free trial" button sends people there for now.
+// Swap this for an app-store deep link once the native apps ship.
+export const webAppUrl = "https://singnplay.flutterflow.app";
+
 export const hero = {
   eyebrow: "SINGnPLAY WorshipTime",
   heading: "For families to share joyful moments and connect better",

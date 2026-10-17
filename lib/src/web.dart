@@ -1,5 +1,6 @@
 import 'dart:js_interop';
 import 'dart:js_interop_unsafe';
+import 'dart:typed_data';
 
 import 'package:web/web.dart' as web;
 
@@ -16,6 +17,12 @@ class SnpWebAudio {
 
   static web.AudioContext? _ctx;
   static final Map<int, web.AudioBuffer> _buffers = <int, web.AudioBuffer>{};
+
+  /// Where each recording's sound starts (seconds). MP3s open with a few
+  /// milliseconds of encoder padding (and the render's own lead-in);
+  /// Chrome strips the padding when it decodes, Safari does not, so a
+  /// press on an iPhone waited for it. A press plays from here instead.
+  static final Map<int, double> _starts = <int, double>{};
   static final Map<int, _Voice> _voices = <int, _Voice>{};
   static bool _unlockArmed = false;
 
@@ -45,7 +52,14 @@ class SnpWebAudio {
       final session = web.window.navigator.getProperty<JSObject?>('audioSession'.toJS);
       session?.setProperty('type'.toJS, 'playback'.toJS);
     } catch (_) {/* older browsers: nothing to set */}
-    final ctx = web.AudioContext();
+    // The lowest output latency the device offers (a key must sound the
+    // moment it is touched).
+    web.AudioContext ctx;
+    try {
+      ctx = web.AudioContext(web.AudioContextOptions(latencyHint: 'interactive'.toJS));
+    } catch (_) {
+      ctx = web.AudioContext();
+    }
     _ctx = ctx;
     _armUnlock();
     return ctx;
@@ -80,6 +94,7 @@ class SnpWebAudio {
       final bytes = await response.arrayBuffer().toDart;
       final buffer = await ctx.decodeAudioData(bytes).toDart;
       _buffers[id] = buffer;
+      _starts[id] = soundStartSeconds(buffer);
       return true;
     } catch (_) {
       return false;
@@ -101,7 +116,7 @@ class SnpWebAudio {
     g.gain.value = gain.clamp(0.0, 1.0);
     source.connect(g);
     g.connect(ctx.destination);
-    source.start();
+    source.start(0, _starts[id] ?? 0.0);
     final voice = _Voice(source, g);
     _voices[id] = voice;
     source.onended = ((web.Event _) {
@@ -135,5 +150,33 @@ class SnpWebAudio {
       release(id);
     }
     _buffers.clear();
+    _starts.clear();
   }
+
+  /// The first moment the recording is audible (above -50 dB), less 2 ms
+  /// so the attack is kept whole. Looks at the first half second only.
+  static double soundStartSeconds(web.AudioBuffer buffer) {
+    try {
+      final rate = buffer.sampleRate.toDouble();
+      final data = buffer.getChannelData(0).toDart;
+      return firstSoundSeconds(data, rate);
+    } catch (_) {
+      return 0.0;
+    }
+  }
+}
+
+/// Where [samples] (at [rate] per second) first rise above [threshold]
+/// (-50 dB), less [preRollMs]; 0 when they never do in [scanSeconds].
+double firstSoundSeconds(Float32List samples, double rate,
+    {double threshold = 0.00316, double preRollMs = 2, double scanSeconds = 0.5}) {
+  final limit = (rate * scanSeconds).round().clamp(0, samples.length);
+  for (var i = 0; i < limit; i++) {
+    final v = samples[i];
+    if (v > threshold || v < -threshold) {
+      final t = i / rate - preRollMs / 1000;
+      return t < 0 ? 0.0 : t;
+    }
+  }
+  return 0.0;
 }

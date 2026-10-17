@@ -1,0 +1,13 @@
+name: snp_web_audio
+description: >-
+  WorshipTime's piano sound in the browser: one Web Audio context, each key's
+  recording decoded once and played as a buffer. A stub elsewhere (Android and
+  iOS apps keep their own engine).
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  web: ">=1.0.0 <2.0.0"

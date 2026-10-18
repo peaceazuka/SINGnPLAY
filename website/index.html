@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SINGnPLAY · Apps for families who sing together</title>
+  <meta name="description" content="SINGnPLAY makes joyful music apps for families. WorshipTime is the first, with more on the way.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">SING<span>n</span>PLAY</a>
+      <nav class="nav" aria-label="Main">
+        <a href="#apps">Apps</a>
+        <a href="#progress">Progress</a>
+        <a href="/worshiptime/">WorshipTime</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Music apps for the whole family</p>
+          <h1>For families to share joyful moments and connect better.</h1>
+          <p class="lead">SINGnPLAY builds playful apps that get everyone singing, learning and making music together. WorshipTime is our first app, and it is just the beginning.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="/worshiptime/">Meet WorshipTime</a>
+            <a class="btn btn-ghost" href="#apps">See all apps</a>
+          </div>
+        </div>
+        <div aria-hidden="true">
+          <div class="phone">
+            <p class="hello">Good morning,</p>
+            <p class="name">Mia 👋</p>
+            <div class="continue">
+              <small>CONTINUE PRACTICING</small>
+              <strong>Amazing Grace</strong>
+              <div class="bar"><i></i></div>
+            </div>
+            <div class="stats">
+              <div><b>12</b><span>Day streak</span></div>
+              <div><b>28</b><span>Songs</span></div>
+              <div><b>15m</b><span>Today</span></div>
+            </div>
+            <div class="song">Oh Happy Day <span>Worship</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="apps">
+      <div class="wrap">
+        <p class="eyebrow">Our apps</p>
+        <h2>One family, many ways to play</h2>
+        <p class="muted">Each SINGnPLAY app shares the same family profiles and streaks, so a new app feels like home from day one.</p>
+
+        <!--
+          To add an app: copy the WorshipTime <article> below, change its
+          icon, name, badge, description and links, and (optionally) create
+          a page for it at /<app-slug>/index.html like /worshiptime/.
+          Badge classes: "badge beta" (in testing), "badge" (live), "badge soon".
+        -->
+        <div class="apps-grid">
+          <article class="app-card featured">
+            <div class="app-icon">🎵</div>
+            <span class="badge beta">In beta · Android</span>
+            <h3>WorshipTime</h3>
+            <p class="muted">Learn worship songs, hymns and scripture songs together. Separate profiles, daily streaks and a family challenge keep everyone singing.</p>
+            <div class="actions">
+              <a class="btn btn-primary" href="/worshiptime/">Learn more</a>
+              <a class="btn btn-ghost" href="https://singnplay.flutterflow.app">Try the web preview</a>
+            </div>
+          </article>
+
+          <article class="app-card placeholder">
+            <div class="app-icon">✨</div>
+            <span class="badge soon">Coming soon</span>
+            <h3>More apps on the way</h3>
+            <p class="muted">WorshipTime is the first of many SINGnPLAY apps. Follow along as we build the next one.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="progress">
+      <div class="wrap">
+        <p class="eyebrow">Build progress</p>
+        <h2>Where WorshipTime is today</h2>
+        <ol class="roadmap">
+          <li class="done"><span class="mark">✓</span><div><strong>Home dashboard designed and built</strong><br><span class="muted">Family profiles, continue practicing, streaks, song categories and recommendations.</span></div></li>
+          <li class="done"><span class="mark">✓</span><div><strong>Data layer ready for a live backend</strong><br><span class="muted">The app runs on sample data today and switches to the real song API once it is connected.</span></div></li>
+          <li class="done"><span class="mark">✓</span><div><strong>Android test build</strong><br><span class="muted">Version 19 is installable on Android phones for testing.</span></div></li>
+          <li class="now"><span class="mark">●</span><div><strong>Family beta</strong><br><span class="muted">Testing with families and polishing practice and lesson screens.</span></div></li>
+          <li class="next"><span class="mark">○</span><div><strong>Google Play and App Store release</strong><br><span class="muted">Public launch once the beta wraps up.</span></div></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 SINGnPLAY</span>
+      <span><a href="/worshiptime/">WorshipTime</a></span>
+    </div>
+  </footer>
+</body>
+</html>

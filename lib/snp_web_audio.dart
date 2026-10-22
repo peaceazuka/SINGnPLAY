@@ -8,6 +8,8 @@
 /// Why not one HTML <audio> element per key: in iPhone Safari, dozens of
 /// media elements each routed through their own AudioContext make the sound
 /// double and lag (an echo). Buffers in one context do not.
+/// [SnpShare] opens the browser's share menu for a link (no share_plus,
+/// whose win32 5 clashes with the MIDI keyboard package).
 library;
 
 export 'src/stub.dart' if (dart.library.js_interop) 'src/web.dart';

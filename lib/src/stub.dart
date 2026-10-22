@@ -20,3 +20,12 @@ class SnpWebAudio {
   /// Stops everything and frees the decoded sounds.
   static Future<void> dispose() async {}
 }
+
+/// Not a browser: no share menu here (the app copies the link instead).
+class SnpShare {
+  SnpShare._();
+
+  /// "unsupported" here.
+  static Future<String> share(String text, {String title = ''}) async =>
+      'unsupported';
+}

@@ -180,3 +180,24 @@ double firstSoundSeconds(Float32List samples, double rate,
   }
   return 0.0;
 }
+
+/// The browser's own share menu (navigator.share), for a link: on phones it
+/// lists WhatsApp, Messages and the rest. No package needed.
+class SnpShare {
+  SnpShare._();
+
+  /// "shared", "cancelled" (the menu was closed), or "unsupported" (no
+  /// share menu, or the browser refused) — then the caller copies the link.
+  static Future<String> share(String text, {String title = ''}) async {
+    try {
+      final nav = web.window.navigator;
+      if (!(nav as JSObject).has('share')) return 'unsupported';
+      final data = web.ShareData(text: text);
+      if (title.isNotEmpty) data.title = title;
+      await nav.share(data).toDart;
+      return 'shared';
+    } catch (e) {
+      return '$e'.contains('AbortError') ? 'cancelled' : 'unsupported';
+    }
+  }
+}
